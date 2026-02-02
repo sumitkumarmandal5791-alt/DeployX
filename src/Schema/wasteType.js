@@ -12,7 +12,7 @@ const wasteTypeSchema = new mongoose.Schema({
   },
   icon: String,
   pointsValue: Number,
-  co2SavedMg: Number,
+  co2Saved: Number,
   isActive: { type: Boolean, default: true },
   createdAt: { type: Date, default: Date.now }
 });
