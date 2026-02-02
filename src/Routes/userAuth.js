@@ -1,6 +1,7 @@
 const express = require("express");
 const authRoute = express.Router();
-
+const authMiddleware = require ("../middlewares/userAuthMiddleware")
+const adminMiddleware = require ("../middlewares/adminMiddleware")
 
 authRoute.post("/register", register);
 authRoute.post("/login", login);
