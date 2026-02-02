@@ -2,6 +2,7 @@ const redisClient = require("../config/Reddis")
 const User = require("../Schema/userSchema")
 const bcrypt = require("bcrypt")
 const jwt = require("jsonwebtoken")
+const { validate } = require("../utils/validator")
 
 
 
@@ -19,7 +20,8 @@ const Register = async (req, res) => {
         //password ko hash kar do
         req.body.password = await bcrypt.hash(req.body.password, 10)
 
-        req.body.role = 'user'
+        req.body.role = 'USER'
+
         //regsister the user in data base
         const person = await User.create(req.body)
         const reply = {
@@ -59,14 +61,18 @@ const Login = async (req, res) => {
             throw new Error("All fields are mandatory")
 
         //find the user in databse by emailid
-        const person = await User.findOne({ email: email })
+
+        const person = await User.findOne({ email: email }).select("+password")
         if (!person)
             throw new Error("User not found")
+
 
         //cpmpare password given from user and stored in databse
         const isPasswordMatched = await bcrypt.compare(password, person.password)
         if (!isPasswordMatched)
             throw new Error("Invalid credential")
+
+
 
         //create Jwt token
         const token = jwt.sign({ _id: person._id, email: person.email, role: person.role }, process.env.JWT_SECRET_KEY, { expiresIn: '1h' })
@@ -109,3 +115,32 @@ const Logout = async (req, res) => {
         res.status(400).send(error.message)
     }
 }
+
+const getProfile = async (req, res) => {
+    try {
+
+        const user = req.user;
+        res.status(200).json({
+            user
+        })
+    }
+    catch (error) {
+        res.status(400).send(error.message)
+    }
+}
+
+const deleteProfile = async (req, res) => {
+    try {
+        const user = req.user;
+        await User.deleteOne({ _id: user._id });
+        res.status(200).json({
+            message: "Profile deleted successfully"
+        })
+    }
+    catch (error) {
+        res.status(400).send(error.message)
+    }
+}
+
+
+module.exports = { Register, Login, Logout, getProfile, deleteProfile }
