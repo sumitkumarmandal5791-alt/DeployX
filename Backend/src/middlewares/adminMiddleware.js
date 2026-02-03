@@ -5,11 +5,11 @@ const User = require("../Schema/userSchema")
 const adminMiddleware = async (req, res, next) => {
   try {
     const { token } = req.cookies;
-    const payload = jwt.verify(token, process.env.JWT_KEY);
-    if (payload.role != "admin") {
+    const payload = jwt.verify(token, process.env.JWT_SECRET_KEY);
+    if (payload.role != "ADMIN") {
       throw new Error("Admin authorisation failed!");
     }
-   
+
     const { _id, email } = payload;
     if (!_id) {
       throw new Error("ID missing");
@@ -17,7 +17,7 @@ const adminMiddleware = async (req, res, next) => {
     if (!email) {
       throw new Error("Email is missing");
     }
-    const isBlocked = await redisClient.exists(`blocked:${token}`);
+    const isBlocked = await redisClient.exists(`token:${token}`);
     if (isBlocked) throw new Error("Token expired!");
     const user = await User.findById(_id);
     req.user = user;

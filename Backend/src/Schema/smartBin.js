@@ -38,7 +38,7 @@ const binSchema = new mongoose.Schema({
   }],
   capacity: {
     type: Number,
-    default: 100 
+    default: 100
   },
   currentCount: {
     type: Number,
@@ -58,14 +58,16 @@ const binSchema = new mongoose.Schema({
   }
 });
 
-binSchema.virtual('isFull').get(function() {
+binSchema.virtual('isFull').get(function () {
   return this.fillLevel >= 80 || this.currentCount >= this.capacity;
 });
-binSchema.methods.updateFillLevel = function() {
+binSchema.methods.updateFillLevel = function () {
   this.fillLevel = Math.round((this.currentCount / this.capacity) * 100);
   if (this.fillLevel >= 80) {
     this.status = 'FULL';
   }
 };
+
+binSchema.index({ location: "2dsphere" });
 
 module.exports = mongoose.model('Bin', binSchema);
