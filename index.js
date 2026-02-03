@@ -6,7 +6,7 @@ const app = express();
 const redisClient = require("./src/config/Reddis")
 const cookieParser = require('cookie-parser')
 const cors = require("cors")
-
+const authRoute = require ("./src/Routes/userAuth")
 app.use(cors({
     origin: ['http://localhost:5173'],
     credentials: true,
