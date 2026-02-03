@@ -24,7 +24,14 @@ const userSchema = new mongoose.Schema({
   password: {
     type: String,
     required: [true, "Password is required"],
-    select: false
+    select: false,
+    validate: {
+      validator: function(v) {
+      
+        return /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{8,}$/.test(v);
+      },
+      message: props => 'Password must be at least 8 characters long and include uppercase, lowercase, number, and special character.'
+    }
   },
   role: {
     type: String,
@@ -39,7 +46,7 @@ const userSchema = new mongoose.Schema({
   totalCO2Saved: {
     type: Number,
     default: 0, // in grams
-
+   
   }
 }, {
   timestamps: true

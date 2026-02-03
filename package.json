@@ -2,22 +2,14 @@
   "name": "backend",
   "version": "1.0.0",
   "description": "",
-  "keywords": [],
-  "homepage": "https://github.com/sumitkumarmandal5791-alt/DeployX#readme",
-  "bugs": {
-    "url": "https://github.com/sumitkumarmandal5791-alt/DeployX/issues"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/sumitkumarmandal5791-alt/DeployX.git"
-  },
-  "license": "ISC",
-  "author": "",
-  "type": "commonjs",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
   "dependencies": {
     "bcrypt": "^6.0.0",
     "cookie-parser": "^1.4.7",

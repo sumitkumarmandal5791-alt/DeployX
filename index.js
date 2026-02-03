@@ -6,12 +6,7 @@ const app = express();
 const redisClient = require("./src/config/Reddis")
 const cookieParser = require('cookie-parser')
 const cors = require("cors")
-<<<<<<< HEAD:index.js
 const authRoute = require ("./src/Routes/userAuth")
-=======
-const authRoute = require("./src/Routes/userAuth")
-
->>>>>>> 4dd4a096405a0cda08c763a99629a792889d1b4f:Backend/index.js
 app.use(cors({
     origin: ['http://localhost:5173'],
     credentials: true,
@@ -22,17 +17,8 @@ app.use(cors({
 
 
 
-
 app.use(express.json());
 app.use(cookieParser());
-
-const binRoute = require("./src/Routes/binRoute");
-const adminRoute = require("./src/Routes/adminRoute");
-
-app.use("/bin", binRoute);
-app.use("/admin", adminRoute);
-app.use("/user", authRoute)
-
 
 
 

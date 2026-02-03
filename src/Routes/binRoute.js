@@ -9,17 +9,17 @@ const {
   deleteBin,
   emptyBin
 } = require('../controllers/binController');
-const adminMiddleware = require("../middlewares/adminMiddleware")
-const userAuthMiddleware = require("../middlewares/userAuthMiddleware")
+const adminMiddleware = require ("../middlewares/adminMiddleware")
+const userAuthMiddleware = require ("../middlewares/userAuthMiddleware")
 //public route
 binRouter.get('/', getAllBins);
 binRouter.get('/nearby', getNearbyBins);
 binRouter.get('/:id', getBin);
 
-//protected route
-binRouter.post('/', adminMiddleware, createBin);
+//portected route
+binRouter.post('/', adminMiddleware,  createBin);
 binRouter.put('/:id', adminMiddleware, updateBin);
 binRouter.delete('/:id', adminMiddleware, deleteBin);
 binRouter.post('/:id/empty', adminMiddleware, emptyBin);
 
-module.exports = binRouter; 
+module.exports = binRouter;
