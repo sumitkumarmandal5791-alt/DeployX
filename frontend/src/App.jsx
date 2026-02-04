@@ -7,6 +7,7 @@ import Entere from "./pages/Enterpage"
 import MapPage from './pages/MapPage'
 import BinNavigatePage from './pages/BinNavigatePage'
 import AdminDashboard from './pages/AdminDashboard'
+import BadgesPage from './pages/BadgesPage'
 
 function App() {
 
@@ -20,6 +21,7 @@ function App() {
         <Route path="/map" element={<MapPage></MapPage>}></Route>
         <Route path="/map/navigate" element={<BinNavigatePage></BinNavigatePage>}></Route>
         <Route path="/admin" element={<AdminDashboard></AdminDashboard>}></Route>
+        <Route path="/badges" element={<BadgesPage></BadgesPage>}></Route>
       </Routes>
     </>
   )
