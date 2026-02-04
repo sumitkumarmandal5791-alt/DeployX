@@ -1,25 +1,35 @@
-from fastapi import FastAPI, UploadFile, File
+from fastapi import FastAPI, UploadFile, File, HTTPException
 from preprocess import preprocess_image
 from detector import detect_item
 
 app = FastAPI(title="Smart E-Waste Image Detection")
 
-# 1️⃣ IMAGE UPLOAD + DETECTION ENDPOINT
+
 @app.post("/detect")
 async def detect_image(file: UploadFile = File(...)):
-    image_bytes = await file.read()
+    content_type = file.content_type or ""
 
-    image_np = preprocess_image(image_bytes)
-    result = detect_item(image_np)
+    if not content_type.startswith("image/"):
+        raise HTTPException(status_code=400, detail="Only image files are allowed")
 
-    return {
-        "detected_item": result["item"],
-        "confidence_percent": result["confidence"],
-        "explanation": result["reason"]
-    }
+    try:
+        image_bytes = await file.read()
+        image_np = preprocess_image(image_bytes)
+        result = detect_item(image_np)
+
+        return {
+            "detected_item": result["item"],
+            "confidence_percent": result["confidence"],
+            "explanation": result["reason"]
+        }
+
+    except ValueError as e:
+        raise HTTPException(status_code=400, detail=str(e))
+
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Detection failed: {str(e)}")
 
 
-# 2️⃣ CONFIRMATION ENDPOINT (already correct)
 @app.post("/confirm")
 async def confirm_item(item: str):
     value_map = {

@@ -1,6 +1,10 @@
+fastapi
+uvicorn
 torch
 torchvision
 ftfy
 regex
 tqdm
-git+https://github.com/openai/CLIP.gi
+opencv-python
+pillow
+git+https://github.com/openai/CLIP.git
