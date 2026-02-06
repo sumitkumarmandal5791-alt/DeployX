@@ -1,0 +1,52 @@
+@import "tailwindcss";
+@variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --color-brand-green: #C5FF41;
+  --color-brand-dark: #0B0B0B;
+  --color-brand-surface: #121212;
+}
+
+:root {
+  --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+}
+
+body {
+  font-family: var(--font-sans);
+  @apply antialiased text-gray-900 bg-white dark:bg-brand-dark dark:text-white transition-colors duration-300;
+}
+
+@utility glass-effect {
+  @apply bg-white/70 backdrop-blur-xl border border-white/20;
+}
+
+:where(.dark, .dark *) {
+  .glass-effect {
+    @apply bg-brand-surface/70 border-white/10;
+  }
+}
+
+.pill-nav {
+  @apply flex items-center gap-6 px-6 py-3 rounded-full shadow-lg glass-effect;
+}
+
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Required Leaflet styles */
+.leaflet-container {
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+
+.leaflet-control-container {
+  z-index: 1000;
+}
