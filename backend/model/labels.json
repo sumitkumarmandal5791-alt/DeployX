@@ -1,0 +1,7 @@
+{
+  "battery": 0,
+  "mobile_phone": 1,
+  "laptop": 2,
+  "charger": 3,
+  "cable": 4
+}
