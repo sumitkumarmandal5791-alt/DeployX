@@ -15,9 +15,10 @@ const TransactionRouter = require("./src/Routes/transactionRoute")
 const RedemptionRouter = require("./src/Routes/redemptionRoutes");
 const wasteRouter = require("./src/Routes/wasteTypeRoutes");
 
+const allowedOrigin = process.env.NODE_ENV === 'production' ? process.env.CORS_ORIGIN_PROD : process.env.CORS_ORIGIN_DEV;
 
 app.use(cors({
-    origin: "http://localhost:5173",
+    origin: allowedOrigin,
     credentials: true
 }));
 
@@ -53,8 +54,8 @@ const InitalizeConnection = async () => {
         const server = http.createServer(app);
         const io = new Server(server, {
             cors: {
-                origin: "http://localhost:5173",
-                methods: ["GET", "POST"],
+                origin: allowedOrigin,
+                methods: ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"],
                 credentials: true
             }
         });

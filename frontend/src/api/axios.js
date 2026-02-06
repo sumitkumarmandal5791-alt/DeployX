@@ -1,7 +1,7 @@
 import axios from 'axios';
-
+const allowedOrigin = import.meta.env.VITE_BASE_URL
 const api = axios.create({
-    baseURL: 'http://localhost:1200',
+    baseURL: allowedOrigin,
     withCredentials: true,
 });
 
