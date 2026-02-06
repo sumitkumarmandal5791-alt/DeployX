@@ -172,6 +172,6 @@ Built with speed, creativity, and caffeine ☕ during a hackathon.
 ### 🙌 Team
 
 Hackathon Participants — 
-Harshit Kumar
-Md Faizal Ali
+Harshit Kumar----
+Md Faizal Ali---
 Sumit Mandal
