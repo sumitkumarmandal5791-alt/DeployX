@@ -1,6 +1,6 @@
 import { Link, useNavigate } from 'react-router-dom'
 import { useState } from 'react'
-import axiosClinet from '../api/axois.js';
+import axiosClinet from '../api/axios.js';
 import toast, { Toaster } from 'react-hot-toast';
 import ThemeToggle from '../components/ThemeToggle';
 
