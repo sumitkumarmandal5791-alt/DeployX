@@ -2,10 +2,11 @@ import React, { useState, useRef, useCallback, useEffect } from 'react';
 import Webcam from 'react-webcam';
 import { ArrowLeft, RefreshCw, CheckCircle, AlertCircle, Activity } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
+import axiosClinet from '../api/axios.js';
 import toast, { Toaster } from 'react-hot-toast';
 import ThemeToggle from '../components/ThemeToggle';
 import transactionService from '../services/transactionService';
+import axios from "axios";
 
 const AnalysisPage = () => {
     const navigate = useNavigate();
@@ -51,7 +52,7 @@ const AnalysisPage = () => {
 
             // Call Python backend
             // Assuming Python backend runs on port 8000
-            const response = await axios.post('http://localhost:8000/detect', formData, {
+            const response = await axios.post('https://deployx-sdny.onrender.com/detect', formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data',
                 },

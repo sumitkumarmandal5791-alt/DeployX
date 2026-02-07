@@ -1,4 +1,4 @@
-import axiosClinet from '../utils/axois';
+import axiosClinet from '../api/axios.js';
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useNavigate } from 'react-router-dom';

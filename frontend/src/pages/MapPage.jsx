@@ -2,7 +2,7 @@ import React, { useEffect, useState, useRef } from 'react';
 import { MapContainer, TileLayer, Marker, Popup, useMap, useMapEvents } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import L from 'leaflet';
-import axios from 'axios';
+import axiosClinet from '../api/axios.js';
 import { useSearchParams, useNavigate } from 'react-router-dom';
 import { ArrowLeft, Navigation } from 'lucide-react';
 import ThemeToggle from '../components/ThemeToggle';
@@ -101,7 +101,7 @@ const MapPage = () => {
     const fetchNearbyBins = async (lat, lng, type, rad) => {
         try {
             console.log('Fetching bins with params:', { lat, lng, type, rad });
-            const response = await axios.get(`http://localhost:1200/smartbin`, {
+            const response = await axiosClinet.get(`/smartbin`, {
                 params: {
                     lat,
                     lng,

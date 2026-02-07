@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { MapContainer, TileLayer, Marker, Popup, Polyline } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import L from 'leaflet';
-import axios from 'axios';
+import axiosClinet from '../api/axios.js';
 import { io } from 'socket.io-client';
 import {
     LayoutDashboard, Trash2, Activity, AlertTriangle,
@@ -54,7 +54,7 @@ const AdminDashboard = () => {
 
     useEffect(() => {
         // Init Socket
-        const newSocket = io('http://localhost:1200');
+        const newSocket = io(axiosClinet);
         setSocket(newSocket);
 
         newSocket.on('connect', () => console.log("Socket Connected"));
@@ -81,9 +81,9 @@ const AdminDashboard = () => {
         setLoading(true);
         try {
             const [binsRes, alertsRes, trendsRes] = await Promise.all([
-                axios.get('http://localhost:1200/smartbin'),
-                axios.get('http://localhost:1200/admin/alerts'),
-                axios.get('http://localhost:1200/admin/analytics/trends')
+                axiosClinet.get('/smartbin'),
+                axiosClinet.get('/admin/alerts'),
+                axiosClinet.get('/admin/analytics/trends')
             ]);
 
             if (binsRes.data.success) {
@@ -101,7 +101,7 @@ const AdminDashboard = () => {
 
     const optimizeRoute = async () => {
         try {
-            const response = await axios.get('http://localhost:1200/admin/routes/optimize');
+            const response = await axiosClinet.get('/admin/routes/optimize');
             if (response.data.success) {
                 if (response.data.data.length === 0) {
                     alert("All systems nominal. No bins require collection at this time.");

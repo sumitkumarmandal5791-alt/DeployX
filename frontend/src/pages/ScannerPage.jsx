@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { ArrowLeft, Image as ImageIcon } from 'lucide-react';
 import { Html5Qrcode } from 'html5-qrcode';
 import toast, { Toaster } from 'react-hot-toast';
-import axios from '../api/axios';
+import axiosClinet from '../api/axios.js';
 import ThemeToggle from '../components/ThemeToggle';
 
 const ScannerPage = () => {
@@ -36,7 +36,7 @@ const ScannerPage = () => {
         }
 
         try {
-            const response = await axios.get(`/smartbin/qr/${decodedText}`);
+            const response = await axiosClinet.get(`/smartbin/qr/${decodedText}`);
             const bin = response.data?.data;
 
             if (response.data.success && bin) {

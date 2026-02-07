@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const axiosClinet = axios.create({
-    baseURL: "http://localhost:1200",
+    baseURL: process.env.BASE_URL,
     withCredentials: true,
     headers: {
         "Content-Type": "application/json",

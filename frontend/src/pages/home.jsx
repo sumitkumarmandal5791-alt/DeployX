@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Smartphone, Battery, Laptop, Plug, Cable, MoreHorizontal, User } from 'lucide-react';
-import axios from 'axios';
+import axiosClinet from '../api/axios.js';
 import ThemeToggle from '../components/ThemeToggle';
 
 const HomePage = () => {

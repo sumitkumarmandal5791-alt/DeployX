@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { ArrowLeft, Gift, Tag, ShoppingBag, Clock, CheckCircle } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
-import axios from '../utils/axois';
+import axiosClinet from '../api/axios.js';
 import toast, { Toaster } from 'react-hot-toast';
 import ThemeToggle from '../components/ThemeToggle';
 
@@ -20,7 +20,7 @@ const RewardsPage = () => {
 
     const fetchUserPoints = async () => {
         try {
-            const res = await axios.get('/user/profile');
+            const res = await axiosClinet.get('/user/profile');
             console.log(res.data);
             if (res.data.success) {
                 setUserPoints(res.data.data.totalPoints);
@@ -34,13 +34,13 @@ const RewardsPage = () => {
         setLoading(true);
         try {
             // Fetch Available Rewards
-            const rewardsRes = await axios.get('/reward/available'); // Or /reward for all
+            const rewardsRes = await axiosClinet.get('/reward/available'); // Or /reward for all
             if (rewardsRes.data.success) {
                 setRewards(rewardsRes.data.data);
             }
 
             // Fetch My Redemptions
-            const redemptionRes = await axios.get('/redemption/my-history');
+            const redemptionRes = await axiosClinet.get('/redemption/my-history');
             console.log(redemptionRes.data);
             if (redemptionRes.data.success) {
                 setMyRedemptions(redemptionRes.data.data);
@@ -69,7 +69,7 @@ const RewardsPage = () => {
         if (!window.confirm(`Redeem ${reward.name} for ${reward.pointsCost} points?`)) return;
 
         try {
-            const res = await axios.post(`/redemption/${reward._id}`);
+            const res = await axiosClinet.post(`/redemption/${reward._id}`);
             if (res.data.success) {
                 toast.success("Reward Redeemed Successfully!");
                 fetchUserPoints();

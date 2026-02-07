@@ -15,7 +15,7 @@ const TransactionRouter = require("./src/Routes/transactionRoute")
 const RedemptionRouter = require("./src/Routes/redemptionRoutes");
 const wasteRouter = require("./src/Routes/wasteTypeRoutes");
 
-const allowedOrigin = process.env.NODE_ENV === 'production' ? process.env.CORS_ORIGIN_PROD : process.env.CORS_ORIGIN_DEV;
+const allowedOrigin = `${process.env.NODE_ENV}` === "production" ? `${process.env.CORS_ORIGIN_PROD}` : `${process.env.CORS_ORIGIN_DEV}`;
 
 app.use(cors({
     origin: allowedOrigin,
