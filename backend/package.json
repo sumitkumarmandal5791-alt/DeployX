@@ -7,7 +7,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "node index.js",
-    "build": "concurrently \"node index.js\" \"python preprocess.py\""
+    "build": "concurrently \"node index.js\" \"python preprocess.py\" \"python detector.py\" \"python app.py\""
   },
   "keywords": [],
   "author": "",
